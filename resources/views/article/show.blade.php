@@ -11,11 +11,11 @@
     <div class="container my-5">
         <div class="row justify-content-center">
             <div class="col-12 col-md-8 d-flex flex-column">
-                <img src="{{ Storage::url($article->image) }}" class="img-fluid" alt="Immagine dell'articolo {{ $article->title }}">
+                <img src="{{Storage::url($article->image)}}" class="img-fluid" alt="Immagine dell'articolo {{ $article->title }}">
                 <div class="text-center">
                     <h2>{{ $article->subtitle }}</h2>
                     <p class="fs-5"> Categoria:
-                        <a href="{{ route('article.byCategory', $article->category) }}" class="text-cpitalize fw-bold text-muted"> {{ $article->category->name }}</a>
+                        <a href="{{route('article.byCategory', $article->category)}}" class="text-cpitalize fw-bold text-muted"> {{ $article->category->name }}</a>
                     </p>
                     <div class="text-muted my-3">
                         <p>Redatto il {{ $article->created_at->format('d/m/Y') }} da {{ $article->user->name }}

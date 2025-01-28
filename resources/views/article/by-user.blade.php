@@ -2,7 +2,7 @@
 <div lcass=""container-fluid p-5 bg-secondary-subtle text-center>
         <div class="row justify-content-center">
             <div class="col-12">
-            <h1 class="display-1"> {{ $category->name }}</h1>
+            <h1 class="display-1"> {{ $user->name }}</h1>
             </div>
         </div>
 </div>
@@ -22,7 +22,7 @@
             <p>Redatto il {{ $article->created_at->format('d/m/y') }} <br>
             da {{ $article->user->name }}
             </p>
-       <a href="{{ route('article.show, $article') }}" class="btn btn-secondary">Leggi</a>
+       <a href="{{ route('article.show', $article) }}" class="btn btn-secondary">Leggi</a>
         </div>
 
         </div>

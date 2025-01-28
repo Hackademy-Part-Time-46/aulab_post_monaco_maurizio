@@ -25,7 +25,7 @@
             <p>Redatto il {{ $article->created_at->format('d/m/y') }} <br>
             da <a href="{{ route('article.byUser', $article->user) }}" class="text-capitalize text-muted"> {{ $article->user->name }}</a>
             </p>
-       <a href="{{ route('article.show, $article') }}" class="btn btn-secondary">Leggi</a>
+       <a href="{{route('article.show', $article)}}" class="btn btn-secondary">Leggi</a>
         </div>
 
         </div>
