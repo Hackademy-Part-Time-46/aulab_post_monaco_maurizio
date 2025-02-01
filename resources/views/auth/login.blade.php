@@ -19,7 +19,7 @@
                         <label for="email" class="form-label">E-mail</label>
                         <input type="email" class="form-control" id="email" name="email" value="{{old('email')}}">
                         @error('email')
-                        <span class="text-danger">{{message}}</span>
+                        <span class="text-danger">{{$message}}</span>
                         @enderror
                     </div>
 
@@ -27,7 +27,7 @@
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" >
                         @error('password')
-                        <span class="text-danger">{{message}}</span>
+                        <span class="text-danger">{{$message}}</span>
                         @enderror
                     </div>
 
