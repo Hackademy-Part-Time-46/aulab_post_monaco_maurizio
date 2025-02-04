@@ -16,7 +16,7 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <h2>Richieste per il ruolo di amministratore</h2>
-            <x-request-table :roleRequest="$adminRequests" role="amministratore" />
+            <x-requests-table :roleRequest="$adminRequests" role="amministratore" />
         </div>
     </div>
 </div>
@@ -25,7 +25,7 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <h2>Richieste per il ruolo di revisore</h2>
-            <x-request-table :roleRequest="$revisorRequests" role="revisore" />
+            <x-requests-table :roleRequest="$revisorRequests" role="revisore" />
         </div>
     </div>
 </div>
@@ -34,7 +34,7 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <h2>Richieste per il ruolo di redattore</h2>
-            <x-request-table :roleRequest="$writerRequests" role="redattore" />
+            <x-requests-table :roleRequest="$writerRequests" role="redattore" />
         </div>
     </div>
 </div>
