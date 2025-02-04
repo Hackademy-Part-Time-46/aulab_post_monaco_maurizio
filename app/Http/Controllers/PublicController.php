@@ -28,9 +28,10 @@ class PublicController extends Controller implements HasMiddleware
     }
 
     public function careersSubmit(Request $request){
+       // dd($request);
         $request->validate([
             'role'=> 'required', 
-            'email'=> 'email',
+            'email'=> 'required|email',
             'message'=> 'required'
         ]);
 

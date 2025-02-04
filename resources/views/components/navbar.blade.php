@@ -23,11 +23,14 @@
           </a>
           <ul class="dropdown-menu">
           <li>
-            <a class="dropdown-item" href="#" onCLick="event.preventDefault(); document.querySelector('#form-logout').submit();">Logout</a>
+            <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.querySelector('#form-logout').submit();">Logout</a>
             </li>
-            <form action="{{route('logout')}}" method="POST" id="#form-logout" class="d-none">
+            <form action="{{route('logout')}}" method="POST" id="form-logout" class="d-none">
                 @csrf
             </form> 
+            @if (Auth::user()->is_admin)
+            <li><a class="dropdown-item" href="{{ route('admin.dashboard')}}">Dashboard Admin</a></li>
+            @endif
           </ul>
         </li>
         @endauth
@@ -39,6 +42,7 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{{route('register')}}">Registrati</a></li>
             <li><a class="dropdown-item" href="{{route('login')}}">Login</a></li>
+           
         
           </ul>
         </li>

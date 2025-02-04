@@ -15,7 +15,7 @@ class CareerRequestMail extends Mailable
    
     public $info;
    
-    public function __construct()
+    public function __construct($info)
     {
        $this->info = $info;
     }
