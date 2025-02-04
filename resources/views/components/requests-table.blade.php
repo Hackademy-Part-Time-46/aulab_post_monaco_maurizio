@@ -8,7 +8,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach
+        @foreach (roleRequest as $user)
         <tr>
             <th scope="row">{{ $user->id }}</th>
             <td>{{ $user->name }}</td>
