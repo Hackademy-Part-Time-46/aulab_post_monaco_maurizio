@@ -12,8 +12,7 @@ Route::get('/', function () {
 
 Route::get('/', [PublicController::class, 'homepage'])->name('homepage');
 
-Route::get('/article/create', [ArticleController::class, 'create'])->name('article.create');
-Route::post('/article/store', [ArticleController::class, 'store'])->name('article.store');
+
 Route::get('/article/index', [ArticleController::class, 'index'])->name('article.index');
 Route::get('/article/show/{article}', [ArticleController::class, 'show'])->name('article.show');
 Route::get('/article/category/{category}', [ArticleController::class, 'byCategory'])->name('article.byCategory');
@@ -34,4 +33,9 @@ Route::middleware('revisor')->group(function(){
     Route::post('/revisor/{article}/reject', [RevisorController::class, 'rejectArticle'])->name('revisor.rejectArticle');
     Route::post('/revisor/{article}/undo', [RevisorController::class, 'undoArticle'])->name('revisor.undoArticle');
     
+});
+
+Route::middleware('revisor')->group(function(){
+Route::get('/article/create', [ArticleController::class, 'create'])->name('article.create');
+Route::post('/article/store', [ArticleController::class, 'store'])->name('article.store');
 });
