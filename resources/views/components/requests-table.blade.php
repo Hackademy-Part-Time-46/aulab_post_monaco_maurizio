@@ -38,8 +38,9 @@
                                 <button type="submit" class="btn btn-secondary">Attiva {{ $role }}</button>
                             </form>
                         @break
-                        @default 
-                        <p>Nessuna richiesta</p>
+
+                        @default
+                            <p>Nessuna richiesta</p>
                     @endswitch
                 </td>
             </tr>

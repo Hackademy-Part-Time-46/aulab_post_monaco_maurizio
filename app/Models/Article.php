@@ -29,9 +29,8 @@ class Article extends Model
         ];
     }
 
-    public function articleSearch(Request $request){
-        $query = $request->input('query');
-        $articles = Article::search($query)->where('is_accepted', true)->orderBy('created_at', 'desc')->get();
-        return view('article.search-index', compact('articles', 'query'));
+    public function tags(){
+        return $this->belongsToMany(Tag::class);
     }
+    
 }

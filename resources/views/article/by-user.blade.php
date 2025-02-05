@@ -16,6 +16,11 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $article->title }}</h5>
                             <p class="card-subtitle text-muted">{{ $article->subtitle }}</p>
+                            <p class="small text-muted my-0">
+                                @foreach ($article->tags as $tag)
+                                #{{ $tag->name }} 
+                                @endforeach
+                            </p>
                         </div>
                         <div class="card-footer d-flex justify-content-between align-items-center">
                             <p class="mb-0">Redatto il {{ $article->created_at->format('d/m/y') }}<br>
