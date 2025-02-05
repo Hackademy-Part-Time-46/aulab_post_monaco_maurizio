@@ -5,6 +5,8 @@ use App\Http\Controllers\PublicController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RevisorController;
+use App\Http\Controllers\WriterController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -45,5 +47,12 @@ Route::middleware('revisor')->group(function(){
 Route::get('/article/create', [ArticleController::class, 'create'])->name('article.create');
 Route::post('/article/store', [ArticleController::class, 'store'])->name('article.store');
 });
+
+Route::middleware('writer')->group(function(){
+    Route::get('/writer/dashboard', [WriterController::class, 'dashboard'])->name('writer.dashboard');
+    Route::get('/article/edit/{article}', [ArticleController::class, 'edit'])->name('article.edit');
+    Route::get('/article/update/{article}', [ArticleController::class, 'update'])->name('article.update');
+    Route::delete('/article/destroy/{article}', [ArticleController::class, 'destroy'])->name('article.destroy');
+    });
 
 Route::get('/article/search', [ArticleController::class, 'articleSearch'])->name('article.search');

@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\User;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -90,7 +91,10 @@ class ArticleController extends Controller implements HasMiddleware
      */
     public function edit(Article $article)
     {
-        //
+       if(Auth::user()->id == $article->user_id){
+        return view('article.edit', compact('article'));
+       }
+       return redirect()->route('homepage')->with('alert', 'Accesso non consentito');
     }
 
     /**
@@ -98,7 +102,44 @@ class ArticleController extends Controller implements HasMiddleware
      */
     public function update(Request $request, Article $article)
     {
-        //
+        $request->validate([
+            'title' => 'required|min:5|unique:articles,title' . $article->id,
+            'subtitle' => 'required|min:5',
+            'body' => 'required|min:10',
+            'image' => 'image',
+            'category' => 'required',
+            'tags' => 'required'
+        ]);
+
+        $article->update([
+            'title' => '$request->title',
+            'subtitle' => '$request->subtitle',
+            'body' => '$request->body',
+            'category_id' => '$request->category',
+        ]);
+
+        if($request->image){
+            Storage::delete($article->image);
+            $article->update([
+                'image' => $request->file('image')->store('public/images'),
+            ]);
+        }
+
+        $tags = explode(',', $request->tags);
+
+        foreach($tags as $i => $tag){
+            $tags[$i] = trim($tag);
+        }
+
+        $newTags = [];
+        foreach($tags as $tag){
+            $newTag = Tag::updateOrCreate([
+                'name' => strtolower($tag)
+            ]);
+            $newTags[] = $newTag->id;
+        }
+        $article->tags()->sync($newTags);
+        return redirect(route('writer.dashboard'))->with('message', 'Articolo modificato con successo');
     }
 
     /**
@@ -106,7 +147,11 @@ class ArticleController extends Controller implements HasMiddleware
      */
     public function destroy(Article $article)
     {
-        //Article::where('is_accepted', true)-
+        foreach ($article->tags as $tag){
+            $article->tags()->detach($tag);
+        }
+        $article->delete();
+        return redirect()->back()->with('message', 'Articolo cancellato con successo');
     }
 
     public function byCategory(Category $category){
