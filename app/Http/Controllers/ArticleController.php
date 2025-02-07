@@ -55,7 +55,7 @@ class ArticleController extends Controller implements HasMiddleware
             'title' => $request->title,
             'subtitle' => $request->subtitle,
             'body' => $request->body,
-            'image' => $request->file('image')->store('public/images'),
+            'image' => $request->file('image')->store('images', 'public'),
             'category_id' => $request->category,
             'user_id' => Auth::user()->id,
         ]);
@@ -103,7 +103,7 @@ class ArticleController extends Controller implements HasMiddleware
     public function update(Request $request, Article $article)
     {
         $request->validate([
-            'title' => 'required|min:5|unique:articles,title' . $article->id,
+            'title' => 'required|min:5|unique:articles,title,' . $article->id,
             'subtitle' => 'required|min:5',
             'body' => 'required|min:10',
             'image' => 'image',
@@ -112,16 +112,16 @@ class ArticleController extends Controller implements HasMiddleware
         ]);
 
         $article->update([
-            'title' => '$request->title',
-            'subtitle' => '$request->subtitle',
-            'body' => '$request->body',
-            'category_id' => '$request->category',
+            'title' => $request->title,
+            'subtitle' => $request->subtitle,
+            'body' => $request->body,
+            'category_id' => $request->category,
         ]);
 
         if($request->image){
             Storage::delete($article->image);
             $article->update([
-                'image' => $request->file('image')->store('public/images'),
+                'image' => $request->file('image')->store('images', 'public'),
             ]);
         }
 

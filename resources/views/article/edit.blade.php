@@ -44,7 +44,7 @@
                     <select name="category" id="category" class="form-control">
                         <option selected disabled>Seleziona Categoria</option>
                         @foreach ($categories as $category)
-                        <option value="{{$category->id}}" @if($article->category_id == $category_id) selected @endif>{{$category->name}}</option>
+                        <option value="{{$category->id}}" @if($article->category_id == $category->id) selected @endif>{{$category->name}}</option>
                         @endforeach
                     </select>
                     @error('category')
